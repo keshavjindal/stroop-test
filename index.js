@@ -1,3 +1,4 @@
+import fs from 'fs'
 import promptSync from 'prompt-sync';
 const prompt = promptSync();
 import chalk from 'chalk';
@@ -20,7 +21,7 @@ function randomBlockGenerator(n) {
     return result;
 }
 
-const blocks = randomBlockGenerator(10);
+const blocks = randomBlockGenerator(5);
 let patient = {}
 let individualTimes = []
 let totaltime = 0;
@@ -128,8 +129,8 @@ async function start(){
     console.log(patient);
 
     // send this patient data to a google sheet
-
-
+    let patientJsonString = JSON.stringify(patient)
+    await fs.appendFileSync('output.txt' , patientJsonString + "\n")
 }
 
 start()
